@@ -1,12 +1,12 @@
-package com.example.judo_market;
+package com.example.judoStore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JudoMarketApplication {
+public class JudoStoreApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(JudoMarketApplication.class, args);
+		SpringApplication.run(JudoStoreApplication.class, args);
 	}
 
 }

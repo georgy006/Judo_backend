@@ -1,10 +1,10 @@
-package com.example.judo_market;
+package com.example.judoStore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JudoMarketApplicationTests {
+class JudoStoreApplicationTests {
 
 	@Test
 	void contextLoads() {
