@@ -24,12 +24,12 @@ public class Order {
     private Long stockQuantity;
     @ManyToOne
     @JoinColumn(name = "statusId")
-    private OrderStatus status;
+    private OrderStatus orderStatus;
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
 
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "order")
     @JsonIgnore
     private List<OrderItem> orderItems;
 }

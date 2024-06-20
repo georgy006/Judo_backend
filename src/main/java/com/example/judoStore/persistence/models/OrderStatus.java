@@ -18,7 +18,7 @@ public class OrderStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "order_statuses")
+    @OneToMany(mappedBy = "orderStatus")
     @JsonIgnore
     private List<Order> Orders;
 }

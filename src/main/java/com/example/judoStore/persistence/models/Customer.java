@@ -21,7 +21,7 @@ public class Customer {
     private String email;
     private String city;
     private String phoneNumber;
-    @OneToMany(mappedBy = "customers")
+    @OneToMany(mappedBy = "customer")
     @JsonIgnore
     private List<Order> Orders;
 }

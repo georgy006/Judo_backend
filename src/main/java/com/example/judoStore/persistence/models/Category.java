@@ -18,7 +18,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "category")
     @JsonIgnore
     private List<Product> Products;
 }
