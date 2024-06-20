@@ -1,35 +1,32 @@
-package com.example.judoStore.persistence.model;
+package com.example.judoStore.persistence.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "products")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @EqualsAndHashCode
-public class Order {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Timestamp ordersDate;
-    private BigDecimal totalPrice;
+    private String productName;
+    private BigDecimal price;
     private Long stockQuantity;
     @ManyToOne
-    @JoinColumn(name = "statusId")
-    private OrderStatus status;
-    @ManyToOne
-    @JoinColumn(name = "customerId")
-    private Customer customer;
+    @JoinColumn(name = "categoryId")
+    private Category category;
 
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "product")
     @JsonIgnore
     private List<OrderItem> orderItems;
+
 }

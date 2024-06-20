@@ -1,4 +1,4 @@
-package com.example.judoStore.persistence.model;
+package com.example.judoStore.persistence.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
