@@ -44,15 +44,4 @@ public class CustomerServiceImpl implements CustomerService {
        customerRepository.save(customer);
        return customer;
     }
-
-    @Override
-    public Customer updateCustomer(CreateCustomerRequest request, Long id) {
-        Customer customer = new Customer();
-        customer.setName(request.getName());
-        customer.setEmail(request.getEmail());
-        customer.setCity(request.getCity());
-        customer.setPhoneNumber(request.getPhoneNumber());
-        customerRepository.save(customer);
-        return customer;
-    }
 }
