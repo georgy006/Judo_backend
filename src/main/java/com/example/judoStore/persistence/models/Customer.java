@@ -23,5 +23,5 @@ public class Customer {
     private String phoneNumber;
     @OneToMany(mappedBy = "customer")
     @JsonIgnore
-    private List<Order> Orders;
+    private List<Order> orders;
 }

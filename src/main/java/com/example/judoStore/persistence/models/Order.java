@@ -23,10 +23,10 @@ public class Order {
     private BigDecimal totalPrice;
     private Long stockQuantity;
     @ManyToOne
-    @JoinColumn(name = "statusId")
+    @JoinColumn(name = "status_id")
     private OrderStatus orderStatus;
     @ManyToOne
-    @JoinColumn(name = "customerId")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @OneToMany(mappedBy = "order")

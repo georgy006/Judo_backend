@@ -1,19 +1,19 @@
 ALTER TABLE products
-    ADD CONSTRAINT categoryId_FK FOREIGN KEY (categoryId)
+    ADD CONSTRAINT category_id_fk FOREIGN KEY (category_id)
         REFERENCES categories (id);
 
 ALTER TABLE orders
-    ADD CONSTRAINT customerId_FK FOREIGN KEY (customerId)
+    ADD CONSTRAINT customer_id_fk FOREIGN KEY (customer_id)
         REFERENCES customers (id);
 
 ALTER TABLE orders
-    ADD CONSTRAINT statusId_FK FOREIGN KEY (statusId)
+    ADD CONSTRAINT status_id_fk FOREIGN KEY (status_id)
         REFERENCES order_statuses (id);
 
 ALTER TABLE order_items
-    ADD CONSTRAINT ordersId_FK FOREIGN KEY (ordersId)
+    ADD CONSTRAINT orders_id_fk FOREIGN KEY (orders_id)
         REFERENCES orders (id);
 
 ALTER TABLE order_items
-    ADD CONSTRAINT productsId_FK FOREIGN KEY (productsId)
+    ADD CONSTRAINT products_id_fk FOREIGN KEY (products_id)
         REFERENCES products (id);

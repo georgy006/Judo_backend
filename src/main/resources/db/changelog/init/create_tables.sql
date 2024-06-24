@@ -4,30 +4,30 @@ CREATE TABLE customers
     name varchar(256) NOT NULL,
     email varchar(256) NOT NULL,
     city varchar(256) NOT NULL,
-    phoneNumber varchar(256) NOT NULL
+    phone_number varchar(256) NOT NULL
 );
 CREATE TABLE orders
 (
     id bigserial CONSTRAINT orders_PK PRIMARY KEY,
-    ordersDate timestamp NOT NULL,
-    totalPrice decimal NOT NULL,
-    statusId bigserial NOT NULL,
-    customerId bigserial NOT NULL
+    orders_date timestamp NOT NULL,
+    total_price decimal NOT NULL,
+    status_id bigserial NOT NULL,
+    customer_id bigserial NOT NULL
 );
 CREATE TABLE order_items
 (
     id bigserial CONSTRAINT order_items_PK PRIMARY KEY,
-    ordersId bigserial NOT NULL,
-    productsId bigserial NOT NULL,
+    orders_id bigserial NOT NULL,
+    products_id bigserial NOT NULL,
     quantity bigserial NOT NULL
 );
 CREATE TABLE products
 (
     id bigserial CONSTRAINT products_PK PRIMARY KEY,
-    productName varchar(256) NOT NULL,
+    product_name varchar(256) NOT NULL,
     price decimal NOT NULL,
-    stockQuantity bigserial NOT NULL,
-    categoryId bigserial NOT NULL
+    stock_quantity bigserial NOT NULL,
+    category_id bigserial NOT NULL
 );
 CREATE TABLE categories
 (

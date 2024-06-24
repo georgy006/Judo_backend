@@ -20,5 +20,5 @@ public class OrderStatus {
     private String name;
     @OneToMany(mappedBy = "orderStatus")
     @JsonIgnore
-    private List<Order> Orders;
+    private List<Order> orders;
 }
