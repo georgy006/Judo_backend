@@ -1,9 +1,7 @@
 package com.example.judoStore.controller;
 
 import com.example.judoStore.persistence.models.Customer;
-import com.example.judoStore.persistence.models.Product;
 import com.example.judoStore.requests.CreateCustomerRequest;
-import com.example.judoStore.requests.CreateProductRequest;
 import com.example.judoStore.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +29,14 @@ public class CustomerController {
     }
 
     @PostMapping(path = "/customer")
-    public Customer createProduct(@RequestBody CreateCustomerRequest request){
+    public Customer createCustomer(@RequestBody CreateCustomerRequest request){
         return customerService.createCustomer(request);
     }
 
+
     @PostMapping(path = "/customer/{id}")
-    public Customer createProductById(@PathVariable(name = "id") Long id,@RequestBody CreateCustomerRequest request){
-        return customerService.createCustomer(request);
+    public Customer updateCustomerById(@PathVariable(name = "id") Long id,@RequestBody CreateCustomerRequest request){
+        return customerService.updateCustomerById(id,request);
     }
 
 }

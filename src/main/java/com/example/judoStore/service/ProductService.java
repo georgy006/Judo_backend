@@ -1,6 +1,5 @@
 package com.example.judoStore.service;
 
-import com.example.judoStore.persistence.models.Category;
 import com.example.judoStore.persistence.models.Product;
 import com.example.judoStore.requests.CreateProductRequest;
 
