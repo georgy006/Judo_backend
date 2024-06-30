@@ -15,6 +15,11 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
+    @GetMapping("/login")
+    public String login(){
+        return "hello";
+    }
+
     @GetMapping(path = "/category")
     public List<Category> getAllCategory(){
         return categoryService.getAllCategories();
