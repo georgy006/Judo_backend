@@ -20,6 +20,7 @@ public class CategoryController {
         return "hello";
     }
 
+
     @GetMapping(path = "/category")
     public List<Category> getAllCategory(){
         return categoryService.getAllCategories();
