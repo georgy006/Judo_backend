@@ -1,14 +1,13 @@
-package com.example.judoStore;
+package com.example.studioJudo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-
 
 @SpringBootApplication
-public class JudoStoreApplication {
+public class StudioJudoApplication {
+
 	public static void main(String[] args) {
-		SpringApplication.run(JudoStoreApplication.class, args);
+		SpringApplication.run(StudioJudoApplication.class, args);
 	}
 
 }
