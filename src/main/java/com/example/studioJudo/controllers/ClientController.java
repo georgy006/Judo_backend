@@ -10,33 +10,33 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200") // обязательно чтобы связать с фронтом!
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/client")
 public class ClientController {
 
     @Autowired
     private ClientService clientService;
 
-    @GetMapping("/clients")
+    @GetMapping
     public List<Client> findAllClient() {
         return clientService.findAllClient();
     }
 
-    @PostMapping("/clients")
+    @PostMapping
     public Client saveClient(@RequestBody Client client) {
         return clientService.saveClient(client);
     }
 
-    @GetMapping("/clients/{id}")
+    @GetMapping("/{id}")
     public Optional<Client> findClientById(@PathVariable("id") Integer id) {
-        return clientService.findById(id);
+        return clientService.findClientById(id);
     }
 
-    @PutMapping("/clients/{id}")
+    @PutMapping("/{id}")
     public Client updateClient(@PathVariable("id") Integer id, @RequestBody Client client){
         return clientService.updateClient(client);
     }
 
-    @DeleteMapping("/clients/{id}")
+    @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable("id") Integer id){
         clientService.deleteClient(id);
     }

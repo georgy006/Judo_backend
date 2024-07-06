@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface SessionService {
     List<Session> findAllSession();
-    Optional<Session> findById(Integer id);
+    Optional<Session> findSessionById(Integer id);
     Session saveSession(Session session);
     Session updateSession(Session session);
     void deleteSession(Integer id);

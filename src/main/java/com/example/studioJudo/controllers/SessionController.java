@@ -9,33 +9,33 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/session")
 public class SessionController {
 
     @Autowired
     private SessionService sessionService;
 
-    @GetMapping("/sessions")
+    @GetMapping
     public List<Session> findAllSession() {
         return sessionService.findAllSession();
     }
 
-    @PostMapping("/sessions")
+    @PostMapping
     public Session saveSession(@RequestBody Session session) {
         return sessionService.saveSession(session);
     }
 
-    @GetMapping("/sessions/{id}")
+    @GetMapping("/{id}")
     public Optional<Session> findSessionById(@PathVariable("id") Integer id) {
-        return sessionService.findById(id);
+        return sessionService.findSessionById(id);
     }
 
-    @PutMapping("/sessions/{id}")
+    @PutMapping("/{id}")
     public Session updateSession(@PathVariable("id") Integer id, @RequestBody Session session) {
         return sessionService.updateSession(session);
     }
 
-    @DeleteMapping("/sessions/{id}")
+    @DeleteMapping("/{id}")
     public void deleteSession(@PathVariable("id") Integer id) {
         sessionService.deleteSession(id);
     }

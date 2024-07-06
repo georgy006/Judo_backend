@@ -12,20 +12,20 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/qualification")
 public class QualificationController {
 
     @Autowired
     private QualificationService qualificationService;
 
-    @GetMapping("/qualifications")
+    @GetMapping
     public List<Qualification> findAllQualification() {
         return qualificationService.findAllQualification();
     }
 
-    @GetMapping("/qualifications/{id}")
+    @GetMapping("/{id}")
     public Optional<Qualification> findQualificationById(@PathVariable("id") Integer id) {
-        return qualificationService.findById(id);
+        return qualificationService.findQualificationById(id);
     }
 
 }

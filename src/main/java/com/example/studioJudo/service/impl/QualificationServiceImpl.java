@@ -21,7 +21,7 @@ public class QualificationServiceImpl implements QualificationService {
     }
 
     @Override
-    public Optional<Qualification> findById(Integer id) {
+    public Optional<Qualification> findQualificationById(Integer id) {
         return qualificationRepository.findById(id);
     }
 }

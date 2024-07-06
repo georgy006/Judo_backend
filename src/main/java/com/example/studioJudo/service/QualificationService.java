@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface QualificationService {
     List<Qualification> findAllQualification();
-    Optional<Qualification> findById(Integer id);
+    Optional<Qualification> findQualificationById(Integer id);
 }

@@ -8,7 +8,7 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
-@Table(name="sessions")
+@Table(name="session")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

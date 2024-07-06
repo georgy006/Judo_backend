@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="clients")
+@Table(name="client")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

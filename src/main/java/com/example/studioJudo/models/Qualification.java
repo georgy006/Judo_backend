@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name="qualifications")
+@Table(name="qualification")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

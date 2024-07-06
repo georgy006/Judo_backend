@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ClientService {
     List<Client> findAllClient();
-    Optional<Client> findById(Integer id);
+    Optional<Client> findClientById(Integer id);
     Client saveClient(Client client);
     Client updateClient(Client client);
     void deleteClient(Integer id);

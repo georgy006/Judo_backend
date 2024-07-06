@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="060720240952" author="Roman">
+        <insert tableName="user">
+            <column name="id" value="1"/>
+            <column name="email" value="ivan.ivanov@example.com"/>
+            <column name="password" value="1234"/>
+            <column name="first_name" value="Иван"/>
+            <column name="last_name" value="Иванов"/>
+            <column name="phone_number" value="+79101234567"/>
+<!--            <column name="qualification" value=""/>-->
+        </insert>
+        <insert tableName="user">
+            <column name="id" value="2"/>
+            <column name="email" value="dmitry.kuznetsov@example.com"/>
+            <column name="password" value="1234"/>
+            <column name="first_name" value="Дмитрий"/>
+            <column name="last_name" value="Кузнецов"/>
+            <column name="phone_number" value="+79401234560"/>
+            <column name="qualification" value="3"/>
+        </insert>
+        <insert tableName="user">
+            <column name="id" value="3"/>
+            <column name="email" value="alexey.sidorov@example.com"/>
+            <column name="password" value="1234"/>
+            <column name="first_name" value="Алексей"/>
+            <column name="last_name" value="Сидоров"/>
+            <column name="phone_number" value="+79301234569"/>
+<!--            <column name="qualification" value=""/>-->
+        </insert>
+    </changeSet>
+</databaseChangeLog>

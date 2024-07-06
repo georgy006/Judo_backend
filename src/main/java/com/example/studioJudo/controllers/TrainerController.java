@@ -11,33 +11,33 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/trainer")
 public class TrainerController {
 
     @Autowired
     private TrainerService trainerService;
 
-    @GetMapping("/trainers")
+    @GetMapping
     public List<Trainer> findAllTrainer() {
         return trainerService.findAllTrainer();
     }
 
-    @PostMapping("/trainers")
+    @PostMapping
     public Trainer saveTrainer(@RequestBody Trainer trainer) {
         return trainerService.saveTrainer(trainer);
     }
 
-    @GetMapping("/trainers/{id}")
+    @GetMapping("/{id}")
     public Optional<Trainer> findTrainerById(@PathVariable("id") Integer id) {
-        return trainerService.findById(id);
+        return trainerService.findTrainerById(id);
     }
 
-    @PutMapping("/trainers/{id}")
+    @PutMapping("/{id}")
     public Trainer updateTrainer(@PathVariable("id") Integer id, @RequestBody Trainer trainer){
         return trainerService.updateTrainer(trainer);
     }
 
-    @DeleteMapping("/trainers/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTrainer(@PathVariable("id") Integer id){
         trainerService.deleteTrainer(id);
     }

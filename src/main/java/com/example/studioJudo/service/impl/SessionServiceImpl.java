@@ -21,7 +21,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public Optional<Session> findById(Integer id) {
+    public Optional<Session> findSessionById(Integer id) {
         return sessionRepository.findById(id);
     }
 
