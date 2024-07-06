@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class CreateCustomerRequest {
     private String name;
     private String email;
+    private String password;
     private String city;
     private String phoneNumber;
 }

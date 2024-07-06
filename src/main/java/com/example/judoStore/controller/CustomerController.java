@@ -1,8 +1,11 @@
 package com.example.judoStore.controller;
 
 import com.example.judoStore.persistence.models.Customer;
+import com.example.judoStore.requests.AuthenticationRequestDto;
 import com.example.judoStore.requests.CreateCustomerRequest;
+import com.example.judoStore.responses.AuthenticationResponseDto;
 import com.example.judoStore.service.CustomerService;
+import com.example.judoStore.service.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +15,9 @@ import java.util.List;
 public class CustomerController {
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    AccountService accountService;
 
     @GetMapping(path = "/customers")
     public List<Customer> getAllCustomers(){
@@ -30,13 +36,24 @@ public class CustomerController {
 
     @PostMapping(path = "/customer")
     public Customer createCustomer(@RequestBody CreateCustomerRequest request){
-        return customerService.createCustomer(request);
+//        return customerService.createCustomer(request);
+        return null;
     }
 
 
     @PostMapping(path = "/customer/{id}")
     public Customer updateCustomerById(@PathVariable(name = "id") Long id,@RequestBody CreateCustomerRequest request){
         return customerService.updateCustomerById(id,request);
+    }
+
+    @PostMapping(path = "/customer/login")
+    public AuthenticationResponseDto login(@RequestBody AuthenticationRequestDto request){
+        return accountService.authenticate(request);
+    }
+
+    @PostMapping(path = "/customer/register")
+    public Customer register(@RequestBody CreateCustomerRequest request){
+        return accountService.register(request);
     }
 
 }
