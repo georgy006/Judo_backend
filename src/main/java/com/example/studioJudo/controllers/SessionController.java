@@ -31,7 +31,7 @@ public class SessionController {
     }
 
     @PutMapping("/{id}")
-    public Session updateSession(@PathVariable("id") Integer id, @RequestBody Session session) {
+    public Session updateSession(@RequestBody Session session) {
         return sessionService.updateSession(session);
     }
 

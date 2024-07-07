@@ -24,12 +24,12 @@ public class Trainer {
     private String email;
     private String phone;
 
-    @ManyToOne
-    @JoinColumn(name = "qualification_id")
-    private Qualification qualification;
-
-    @OneToMany(mappedBy = "trainer")
-    @JsonIgnore
-    private List<Session> sessions;
+//    @ManyToOne
+//    @JoinColumn(name = "qualification_id")
+//    private Qualification qualification;
+//
+//    @OneToMany(mappedBy = "trainer")
+//    @JsonIgnore
+//    private List<Session> sessions;
 
 }

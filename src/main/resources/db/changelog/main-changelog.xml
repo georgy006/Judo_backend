@@ -10,10 +10,13 @@
     <include file="ddl/create-table-user-role-changelog.xml" relativeToChangelogFile="true"/>
     <include file="ddl/create-table-session-changelog.xml" relativeToChangelogFile="true"/>
     <include file="ddl/create-table-booking-changelog.xml" relativeToChangelogFile="true"/>
+    <include file="ddl/create-table-user-qualification-changelog.xml" relativeToChangelogFile="true"/>
 
     <include file="dml/qualification-values-insert-changelog.xml" relativeToChangelogFile="true"/>
     <include file="dml/role-values-insert-changelog.xml" relativeToChangelogFile="true"/>
     <include file="dml/user-values-insert-changelog.xml" relativeToChangelogFile="true"/>
-    <include file="dml/user-role-values-insert-changelog.xml" relativeToChangelogFile="true"/>
 
+    <include file="dml/user-role-values-insert-changelog.xml" relativeToChangelogFile="true"/>
+    <include file="dml/user-qualification-values-insert-changelog.xml" relativeToChangelogFile="true"/>
+<!--    когда включаю два последних поля происходит рекурсия почему я не понимаю!!!-->
 </databaseChangeLog>

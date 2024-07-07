@@ -15,9 +15,6 @@
             <column name="session_id" type="bigint">
                 <constraints foreignKeyName="fk_booking_session" references="session(id)"/>
             </column>
-            <column name="status" type="boolean" defaultValueBoolean="false">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

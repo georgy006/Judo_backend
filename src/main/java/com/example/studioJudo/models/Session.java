@@ -20,9 +20,9 @@ public class Session {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Date session_date;
-    private Time start_time;
-    private Time end_time;
+    private Date sessionDate;
+    private Time startTime;
+    private Time endTime;
     private String description;
 
     @OneToOne(mappedBy = "session")
@@ -30,6 +30,6 @@ public class Session {
     private Booking booking;
 
     @ManyToOne
-    @JoinColumn(name = "trainer_id")
-    private Trainer trainer;
+    @JoinColumn(name = "user_id")
+    private User user;
 }

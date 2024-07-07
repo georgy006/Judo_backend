@@ -4,30 +4,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="client")
+@Table(name="role")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @EqualsAndHashCode
-public class Client {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private Date dateOfBirth;
+    private String name;
 
-//    @OneToMany(mappedBy = "client")
-//    @JsonIgnore
-//    private List<Booking> bookings;
+    @ManyToMany(mappedBy = "roles")
+    List<User> users;
 
 }

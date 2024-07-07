@@ -12,6 +12,7 @@
             <column name="first_name" value="Иван"/>
             <column name="last_name" value="Иванов"/>
             <column name="phone_number" value="+79101234567"/>
+            <column name="is_trainer" value="false"/>
 <!--            <column name="qualification" value=""/>-->
         </insert>
         <insert tableName="user">
@@ -21,7 +22,8 @@
             <column name="first_name" value="Дмитрий"/>
             <column name="last_name" value="Кузнецов"/>
             <column name="phone_number" value="+79401234560"/>
-            <column name="qualification" value="3"/>
+            <column name="is_trainer" value="true"/>
+<!--            <column name="qualification" value="3"/>-->
         </insert>
         <insert tableName="user">
             <column name="id" value="3"/>
@@ -30,6 +32,7 @@
             <column name="first_name" value="Алексей"/>
             <column name="last_name" value="Сидоров"/>
             <column name="phone_number" value="+79301234569"/>
+            <column name="is_trainer" value="false"/>
 <!--            <column name="qualification" value=""/>-->
         </insert>
     </changeSet>
