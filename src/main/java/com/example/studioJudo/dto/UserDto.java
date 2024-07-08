@@ -1,5 +1,8 @@
 package com.example.studioJudo.dto;
 
+import com.example.studioJudo.models.Qualification;
+import com.example.studioJudo.models.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -25,15 +28,19 @@ public record UserDto (
 //    @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
     String email,
 
+    @JsonIgnore
+    String password,
+
     @Length(max = 20)
     String phoneNumber,
 
     @NotBlank
     Boolean isTrainer,
 
-    List<Short> roles,
+    Integer qualificationId,
 
-    List<Short> qualifications
+    Integer roleId
+
 ){
 
 }

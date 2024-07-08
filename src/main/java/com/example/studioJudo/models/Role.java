@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name="role")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -21,7 +22,7 @@ public class Role {
 
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role")
     List<User> users;
 
 }

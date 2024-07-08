@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name="qualification")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -25,7 +26,7 @@ public class Qualification {
 //    @JsonIgnore
 //    private List<Trainer> trainers;
 
-    @ManyToMany(mappedBy = "qualifications")
+    @OneToMany(mappedBy = "qualification")
     List<User> users;
 
 

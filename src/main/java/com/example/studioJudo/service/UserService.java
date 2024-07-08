@@ -8,9 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    List<User> findAllUser();
-    Optional<User> findUserById(Integer id);
-    User saveUser(User user);
-    User updateUser(User user);
+
+    List<UserDto> findAllUser();
+
+    Optional<UserDto> findUserById(Integer id);
+
+    UserDto saveUser(UserDto userDto);
+
+    UserDto updateUser(UserDto userDto);
+
     void deleteUser(Integer id);
+
 }
