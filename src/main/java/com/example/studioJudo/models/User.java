@@ -1,5 +1,6 @@
 package com.example.studioJudo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Getter
 @Builder
 @EqualsAndHashCode
-public class User {
+public class User { // implements UserDetails
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,25 +45,9 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "qualification_id")
-    Qualification qualification;
+    private Qualification qualification;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    Role role;
-
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "user_qualification",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "qualification_id")
-//    )
-//    private List<Qualification> qualifications;
-//
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "user_role",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id")
-//    )
-//    private List<Role> roles;
+    private Role role;
 }

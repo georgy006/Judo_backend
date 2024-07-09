@@ -27,6 +27,7 @@ public class Qualification {
 //    private List<Trainer> trainers;
 
     @OneToMany(mappedBy = "qualification")
+    @JsonIgnore
     List<User> users;
 
 

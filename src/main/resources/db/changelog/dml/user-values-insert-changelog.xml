@@ -13,7 +13,8 @@
             <column name="last_name" value="Иванов"/>
             <column name="phone_number" value="+79101234567"/>
             <column name="is_trainer" value="false"/>
-<!--            <column name="qualification" value=""/>-->
+<!--            <column name="qualification_id" value=""/>-->
+            <column name="role_id" value="1"/>
         </insert>
         <insert tableName="user">
             <column name="id" value="2"/>
@@ -23,7 +24,8 @@
             <column name="last_name" value="Кузнецов"/>
             <column name="phone_number" value="+79401234560"/>
             <column name="is_trainer" value="true"/>
-<!--            <column name="qualification" value="3"/>-->
+            <column name="qualification_id" value="3"/>
+            <column name="role_id" value="2"/>
         </insert>
         <insert tableName="user">
             <column name="id" value="3"/>
@@ -33,7 +35,8 @@
             <column name="last_name" value="Сидоров"/>
             <column name="phone_number" value="+79301234569"/>
             <column name="is_trainer" value="false"/>
-<!--            <column name="qualification" value=""/>-->
+<!--            <column name="qualification_id" value=""/>-->
+            <column name="role_id" value="1"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

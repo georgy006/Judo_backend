@@ -23,6 +23,7 @@ public class Role {
     private String name;
 
     @OneToMany(mappedBy = "role")
+    @JsonIgnore
     List<User> users;
 
 }

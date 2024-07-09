@@ -1,21 +1,22 @@
 package com.example.studioJudo.service;
 
 import com.example.studioJudo.dto.UserDto;
-import com.example.studioJudo.models.Client;
 import com.example.studioJudo.models.User;
 
 import java.util.List;
-import java.util.Optional;
+public interface UserService { //extends UserDetailsService
 
-public interface UserService {
+    List<User> findAllUser();
 
-    List<UserDto> findAllUser();
+    User findUserById(Integer id);
 
-    Optional<UserDto> findUserById(Integer id);
+//    UserDto findUserById(Integer id); // Новое
 
-    UserDto saveUser(UserDto userDto);
+//    UserDto findUserByEmail(String email);
 
-    UserDto updateUser(UserDto userDto);
+    User saveUser(UserDto userDto);
+
+    User updateUser(Integer id, UserDto userDto);
 
     void deleteUser(Integer id);
 
