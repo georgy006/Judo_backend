@@ -7,6 +7,7 @@ import com.example.judoStore.responses.AuthenticationResponseDto;
 import com.example.judoStore.service.CustomerService;
 import com.example.judoStore.service.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,4 +57,9 @@ public class CustomerController {
         return accountService.register(request);
     }
 
+    @PostMapping(path = "/customers/logout")
+    public ResponseEntity<Void> logout() {
+        accountService.logout();
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.judoStore.service.impl;
+package com.example.judoStore.service.account.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -17,3 +17,7 @@ ALTER TABLE order_items
 ALTER TABLE order_items
     ADD CONSTRAINT products_id_fk FOREIGN KEY (products_id)
         REFERENCES products (id);
+
+ALTER TABLE refresh_token
+    ADD CONSTRAINT refresh_token_customer_id_fk FOREIGN KEY (customer_id)
+        REFERENCES customers (id);

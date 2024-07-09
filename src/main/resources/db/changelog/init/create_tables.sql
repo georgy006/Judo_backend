@@ -12,23 +12,23 @@ CREATE TABLE orders
     id bigserial CONSTRAINT orders_PK PRIMARY KEY,
     orders_date timestamp NOT NULL,
     total_price decimal NOT NULL,
-    status_id bigserial NOT NULL,
-    customer_id bigserial NOT NULL
+    status_id bigint NOT NULL,
+    customer_id bigint NOT NULL
 );
 CREATE TABLE order_items
 (
     id bigserial CONSTRAINT order_items_PK PRIMARY KEY,
-    orders_id bigserial NOT NULL,
-    products_id bigserial NOT NULL,
-    quantity bigserial NOT NULL
+    orders_id bigint NOT NULL,
+    products_id bigint NOT NULL,
+    quantity bigint NOT NULL
 );
 CREATE TABLE products
 (
     id bigserial CONSTRAINT products_PK PRIMARY KEY,
     product_name varchar(256) NOT NULL,
     price decimal NOT NULL,
-    stock_quantity bigserial NOT NULL,
-    category_id bigserial NOT NULL
+    stock_quantity bigint NOT NULL,
+    category_id bigint NOT NULL
 );
 CREATE TABLE categories
 (
@@ -39,4 +39,10 @@ CREATE TABLE order_statuses
 (
     id bigserial CONSTRAINT statuses_PK PRIMARY KEY,
     name varchar(256) NOT NULL
+);
+CREATE TABLE refresh_token
+(
+    id bigserial CONSTRAINT refresh_token_PK PRIMARY KEY,
+    customer_id bigint NOT NULL,
+    token varchar(512) NOT NULL
 );

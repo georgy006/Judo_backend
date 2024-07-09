@@ -29,6 +29,9 @@ public class Customer implements UserDetails {
     @JsonIgnore
     private List<Order> orders;
 
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, optional = false)
+    private RefreshToken refreshToken;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
