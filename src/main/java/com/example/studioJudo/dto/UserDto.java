@@ -4,8 +4,9 @@ import lombok.*;
 
 @Setter
 @Getter
+@Builder
 public class UserDto {
-//    private Integer id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private String email;

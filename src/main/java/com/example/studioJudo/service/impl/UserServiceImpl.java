@@ -2,6 +2,7 @@ package com.example.studioJudo.service.impl;
 
 import com.example.studioJudo.dto.UserDto;
 import com.example.studioJudo.enumeration.RoleName;
+import com.example.studioJudo.mapper.Mapper;
 import com.example.studioJudo.models.Qualification;
 import com.example.studioJudo.models.Role;
 import com.example.studioJudo.models.User;
@@ -11,6 +12,8 @@ import com.example.studioJudo.repositories.UserRepository;
 import com.example.studioJudo.requests.CreateUserRequest;
 import com.example.studioJudo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +21,8 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    Mapper<UserDto, User> userMapper;
 
     @Autowired
     private UserRepository userRepository;
@@ -30,8 +35,10 @@ public class UserServiceImpl implements UserService {
 
     //User
     @Override
-    public List<User> findAllUser() {
-        return userRepository.findAll();
+    public List<UserDto> findAllUser() {
+        return userRepository.findAll().stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @Override // новое
@@ -43,41 +50,18 @@ public class UserServiceImpl implements UserService {
         throw new RuntimeException();
     }
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        return userRepository.findUserByEmail(username).get();
-//    }
-//
-//    @Override
-//    public UserDto findUserByEmail(String email) {
-//        return userRepository.findUserByEmail(email).get();
-//    }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findUserByEmail(username).get();
+    }
 
     @Override
-    public User saveUser(UserDto userDto) {
-        User user = new User();
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setPhoneNumber(userDto.getPhoneNumber());
+    public User findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email).get();
+    }
 
-        Role role = roleRepository.findById(1)
-                .orElseThrow(() -> new RuntimeException("Default role not found"));
-        user.setRole(role);
-        user.setIsTrainer(false);
-
-//        if(userDto.getRoleId() == 2) {
-//            user.setIsTrainer(true);
-//            Optional<Qualification> qualification = qualificationRepository.findById(userDto.getQualificationId());
-//            if (qualification.isPresent()) {
-//                user.setQualification(qualification.get());
-//            }
-//        } else {
-//            user.setIsTrainer(false);
-//        }
-
-
+    @Override
+    public User saveUser(User user) {
         userRepository.save(user);
         return user;
     }

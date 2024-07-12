@@ -2,7 +2,11 @@ package com.example.studioJudo.controllers;
 
 import com.example.studioJudo.dto.UserDto;
 import com.example.studioJudo.models.User;
+import com.example.studioJudo.requests.AuthenticationRequestDto;
+import com.example.studioJudo.requests.CreateUserRequest;
+import com.example.studioJudo.responses.AuthenticationResponseDto;
 import com.example.studioJudo.service.UserService;
+import com.example.studioJudo.service.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +19,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    AccountService accountService;
+
     @GetMapping
-    public List<User> findAllUser() {
+    public List<UserDto> findAllUser() {
         return userService.findAllUser();
     }
 
@@ -26,8 +33,8 @@ public class UserController {
     }
 
     @PostMapping
-    public User saveUser(@RequestBody UserDto userDto) {
-        return userService.saveUser(userDto);
+    public User saveUser(@RequestBody User user) {
+        return userService.saveUser(user);
     }
 
     @PutMapping("/{id}")
@@ -73,5 +80,21 @@ public class UserController {
     public void deleteTrainer(@PathVariable("id") Integer id){
         userService.deleteTrainer(id);
     }
+
+    @PostMapping("/login")
+    public AuthenticationResponseDto login(@RequestBody AuthenticationRequestDto request){
+        return accountService.login(request);
+    }
+
+    @PostMapping("/signup")
+    public User signup(@RequestBody CreateUserRequest request){
+        return accountService.signup(request);
+    }
+
+//    @PostMapping(path = "/logout")
+//    public ResponseEntity<Void> logout() {
+//        accountService.logout();
+//        return ResponseEntity.noContent().build();
+//    }
 
 }

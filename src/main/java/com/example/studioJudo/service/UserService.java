@@ -2,18 +2,20 @@ package com.example.studioJudo.service;
 
 import com.example.studioJudo.dto.UserDto;
 import com.example.studioJudo.models.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
-public interface UserService { //extends UserDetailsService
+
+public interface UserService extends UserDetailsService {
 
     // User
-    List<User> findAllUser();
+    List<UserDto> findAllUser();
     User findUserById(Integer id);
-    User saveUser(UserDto userDto);
+    User saveUser(User user);
     User updateUser(Integer id, UserDto userDto);
     void deleteUser(Integer id);
 
-    //    UserDto findUserByEmail(String email);
+    User findUserByEmail(String email);
 
     // Client
     List<User> findAllClient();
