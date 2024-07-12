@@ -1,5 +1,6 @@
 package com.example.studioJudo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +33,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "password")
+    @JsonIgnore
     String password;
 
     @Column(name = "phone_number")

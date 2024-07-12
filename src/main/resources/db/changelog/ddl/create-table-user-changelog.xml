@@ -25,7 +25,7 @@
 <!--            <column name="date_of_birth" type="varchar(20)"/>-->
             <column name="is_trainer" type="boolean"/>
             <column name="qualification_id" type="smallint">
-                <constraints foreignKeyName="fk_user_qualification" references="qualification(id)"/>
+                <constraints nullable="true" foreignKeyName="fk_user_qualification" references="qualification(id)"/>
             </column>
             <column name="role_id" type="smallint">
                 <constraints foreignKeyName="fk_user_role" references="role(id)"/>

@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User findUserById(@PathVariable("id") Integer id) {
+    public UserDto findUserById(@PathVariable("id") Integer id) {
         return userService.findUserById(id);
     }
 
@@ -50,21 +50,21 @@ public class UserController {
     // Нахождение всех клиентов
 
     @GetMapping("/client")
-    public List<User> findAllClient() {
+    public List<UserDto> findAllClient() {
         return userService.findAllClient();
     }
 
     // создание, редактирование и удаление тренера!
 
     @GetMapping("/trainer")
-    public List<User> findAllTrainer() {
+    public List<UserDto> findAllTrainer() {
         return userService.findAllTrainer();
     }
 
-    @GetMapping("/trainer/{id}")
-    public User findTrainerById(@PathVariable("id") Integer id) {
-        return userService.findTrainerById(id);
-    }
+//    @GetMapping("/trainer/{id}")
+//    public UserDto findTrainerById(@PathVariable("id") Integer id) {
+//        return userService.findTrainerById(id);
+//    }
 
     @PostMapping("/trainer")
     public User saveTrainer(@RequestBody UserDto userDto) {

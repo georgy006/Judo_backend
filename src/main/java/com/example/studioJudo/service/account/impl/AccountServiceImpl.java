@@ -57,10 +57,8 @@ public class AccountServiceImpl implements AccountService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authenticationRequest.login(), authenticationRequest.password())
         );
-        var user = userService.findUserByEmail(authenticationRequest.login());
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
+        var user = userRepository.findUserByEmail(authenticationRequest.login())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return login(user);
     }
 

@@ -10,19 +10,22 @@ public interface UserService extends UserDetailsService {
 
     // User
     List<UserDto> findAllUser();
-    User findUserById(Integer id);
+    UserDto findUserById(Integer id);
+
     User saveUser(User user);
     User updateUser(Integer id, UserDto userDto);
     void deleteUser(Integer id);
 
-    User findUserByEmail(String email);
+    UserDto findUserByEmail(String email);
 
     // Client
-    List<User> findAllClient();
+    List<UserDto> findAllClient();
 
     // Trainer
-    List<User> findAllTrainer();
-    User findTrainerById(Integer id);
+    List<UserDto> findAllTrainer();
+    //UserDto findTrainerById(Integer id); // Пока не придумал как вывести определенного тренера учитывая роль!
+    // Решил пока что сделать только findUserById
+
     User saveTrainer(UserDto userDto);
     User updateTrainer(Integer id, UserDto userDto);
     void deleteTrainer(Integer id);

@@ -2,8 +2,15 @@ package com.example.studioJudo.mapper.impl;
 
 import com.example.studioJudo.dto.UserDto;
 import com.example.studioJudo.mapper.Mapper;
+import com.example.studioJudo.models.Qualification;
+import com.example.studioJudo.models.Role;
 import com.example.studioJudo.models.User;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Objects.nonNull;
 
 @Component
 public class UserMapper implements Mapper<UserDto, User> {
@@ -18,6 +25,9 @@ public class UserMapper implements Mapper<UserDto, User> {
                 .firstName(user.getFirstName())
                 .phoneNumber(user.getPhoneNumber())
                 .isTrainer(user.getIsTrainer())
+                .qualificationId(nonNull(user.getQualification()) ? user.getQualification().getId() : null)
+//                .qualificationId(user.getQualification().getId())
+                .roleId(user.getRole().getId())
                 .build();
     }
 
@@ -31,6 +41,10 @@ public class UserMapper implements Mapper<UserDto, User> {
                 .firstName(userDto.getFirstName())
                 .phoneNumber(userDto.getPhoneNumber())
                 .isTrainer(userDto.getIsTrainer())
+                .qualification(nonNull(userDto.getQualificationId()) ?
+                        Qualification.builder().id(userDto.getQualificationId()).build() : null)
+                .role(nonNull(userDto.getRoleId()) ?
+                        Role.builder().id(userDto.getRoleId()).build() : null)
                 .build();
     }
 
