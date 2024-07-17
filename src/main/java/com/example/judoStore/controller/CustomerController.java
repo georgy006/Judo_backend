@@ -6,6 +6,7 @@ import com.example.judoStore.requests.CreateCustomerRequest;
 import com.example.judoStore.responses.AuthenticationResponseDto;
 import com.example.judoStore.service.CustomerService;
 import com.example.judoStore.service.account.AccountService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,8 +59,8 @@ public class CustomerController {
     }
 
     @PostMapping(path = "/customers/logout")
-    public ResponseEntity<Void> logout() {
-        accountService.logout();
+    public ResponseEntity<Void> logout(HttpServletRequest request) {
+        accountService.logout(request);
         return ResponseEntity.noContent().build();
     }
 }

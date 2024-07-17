@@ -108,4 +108,8 @@ public class JwtServiceImpl implements JwtService {
     private Key getSigningKey(String secret) {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
     }
+
+    public Date getExpiryDateFromToken(String token) {
+        return extractExpiration(token);
+    }
 }

@@ -3,6 +3,7 @@ package com.example.judoStore.configuration;
 import com.example.judoStore.persistence.models.Customer;
 import com.example.judoStore.persistence.repository.CustomerRepository;
 import com.example.judoStore.service.account.JwtService;
+import com.example.judoStore.service.account.impl.BlacklistServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     final JwtService jwtService;
 
     final CustomerRepository customerRepository;
+    final BlacklistServiceImpl blacklistService;
+
 
     @Override
     protected void doFilterInternal(
@@ -39,6 +42,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         final String jwt = authorizationHeader.substring(7);
+
+        // Проверка наличия токена в черном списке
+        if (blacklistService.isBlacklisted(jwt)) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
         final String userLogin = jwtService.extractLogin(jwt);
         if (userLogin != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             Customer customer = customerRepository.getCustomerByEmail(userLogin)

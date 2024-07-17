@@ -1,6 +1,6 @@
 package com.example.judoStore.persistence.repository;
 
-import com.example.judoStore.persistence.models.RefreshToken;
+import com.example.judoStore.persistence.models.token.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

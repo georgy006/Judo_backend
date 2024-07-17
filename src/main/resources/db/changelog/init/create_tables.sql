@@ -46,3 +46,12 @@ CREATE TABLE refresh_token
     customer_id bigint NOT NULL,
     token varchar(512) NOT NULL
 );
+
+CREATE TABLE blacklisted_tokens
+(
+    id bigserial CONSTRAINT blacklisted_tokens_PK PRIMARY KEY,
+    token varchar(512) NOT NULL UNIQUE,
+    expiry_date timestamp NOT NULL,
+    customer_id bigint NOT NULL
+
+);

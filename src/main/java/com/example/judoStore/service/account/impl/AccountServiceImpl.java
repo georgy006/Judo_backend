@@ -1,7 +1,7 @@
 package com.example.judoStore.service.account.impl;
 
 import com.example.judoStore.persistence.models.Customer;
-import com.example.judoStore.persistence.models.RefreshToken;
+import com.example.judoStore.persistence.models.token.RefreshToken;
 import com.example.judoStore.persistence.repository.RefreshTokenRepository;
 import com.example.judoStore.requests.AuthenticationRequestDto;
 import com.example.judoStore.requests.CreateCustomerRequest;
@@ -10,8 +10,8 @@ import com.example.judoStore.service.CustomerService;
 import com.example.judoStore.service.account.AccountService;
 import com.example.judoStore.service.account.AuthorityService;
 import com.example.judoStore.service.account.JwtService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,9 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
-
-import static org.springframework.data.repository.util.ClassUtils.ifPresent;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +33,7 @@ public class AccountServiceImpl implements AccountService {
     final JwtService jwtService;
     final AuthorityService authorityService;
     final RefreshTokenRepository refreshTokenRepository;
+    final BlacklistServiceImpl blacklistService;
 
     @Override
     @Transactional
@@ -61,10 +62,28 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public void logout() {
+    public void logout(HttpServletRequest request) {
         Optional.ofNullable(authorityService.getCurrentUser())
-                .ifPresent(customer -> refreshTokenRepository.deleteByCustomerId(customer.getId()));
+                .ifPresent(customer -> {
+                    String accessToken = getCurrentAccessToken(request);
+                    if (accessToken != null) {
+                        LocalDateTime expiryDate = jwtService.getExpiryDateFromToken(accessToken).toInstant()
+                                .atZone(ZoneId.systemDefault()).toLocalDateTime();
+                        blacklistService.add(accessToken, expiryDate, customer.getId());
+                    }
+                    refreshTokenRepository.deleteByCustomerId(customer.getId());
+                });
     }
+
+    public String getCurrentAccessToken(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            return authorizationHeader.substring(7);
+        }
+        return null;
+    }
+
+
 
     private AuthenticationResponseDto authenticate(Customer customer) {
         refreshTokenRepository.deleteByCustomerId(customer.getId());

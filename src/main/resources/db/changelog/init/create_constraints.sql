@@ -21,3 +21,9 @@ ALTER TABLE order_items
 ALTER TABLE refresh_token
     ADD CONSTRAINT refresh_token_customer_id_fk FOREIGN KEY (customer_id)
         REFERENCES customers (id);
+
+ALTER TABLE blacklisted_tokens
+    ADD CONSTRAINT blacklisted_tokens_customers_fk FOREIGN KEY (customer_id)
+        REFERENCES customers (id);
+
+

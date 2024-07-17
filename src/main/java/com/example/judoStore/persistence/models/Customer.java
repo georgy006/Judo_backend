@@ -1,5 +1,7 @@
 package com.example.judoStore.persistence.models;
 
+import com.example.judoStore.persistence.models.token.BlacklistedToken;
+import com.example.judoStore.persistence.models.token.RefreshToken;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,7 +32,12 @@ public class Customer implements UserDetails {
     private List<Order> orders;
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, optional = false)
+    @JsonIgnore
     private RefreshToken refreshToken;
+
+//    @OneToMany(mappedBy = "customer")
+//    @JsonIgnore
+//    private List<BlacklistedToken> blacklistedToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

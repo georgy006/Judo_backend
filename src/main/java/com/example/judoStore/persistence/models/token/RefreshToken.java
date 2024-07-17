@@ -1,5 +1,6 @@
-package com.example.judoStore.persistence.models;
+package com.example.judoStore.persistence.models.token;
 
+import com.example.judoStore.persistence.models.Customer;
 import jakarta.persistence.*;
 import lombok.*;
 
