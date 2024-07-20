@@ -1,5 +1,6 @@
 package com.example.studioJudo.controllers;
 
+import com.example.studioJudo.dto.SessionDto;
 import com.example.studioJudo.models.Session;
 import com.example.studioJudo.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +17,23 @@ public class SessionController {
     private SessionService sessionService;
 
     @GetMapping
-    public List<Session> findAllSession() {
+    public List<SessionDto> findAllSession() {
         return sessionService.findAllSession();
     }
 
     @PostMapping
-    public Session saveSession(@RequestBody Session session) {
-        return sessionService.saveSession(session);
+    public SessionDto saveSession(@RequestBody SessionDto sessionDto) {
+        return sessionService.saveSession(sessionDto);
     }
 
     @GetMapping("/{id}")
-    public Optional<Session> findSessionById(@PathVariable("id") Integer id) {
+    public SessionDto findSessionById(@PathVariable("id") Integer id) {
         return sessionService.findSessionById(id);
     }
 
     @PutMapping("/{id}")
-    public Session updateSession(@RequestBody Session session) {
-        return sessionService.updateSession(session);
+    public SessionDto updateSession(@PathVariable("id") Integer id , @RequestBody SessionDto sessionDto) {
+        return sessionService.updateSession(id, sessionDto);
     }
 
     @DeleteMapping("/{id}")

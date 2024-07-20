@@ -1,6 +1,7 @@
 package com.example.studioJudo.service.impl;
 
-import com.example.studioJudo.models.Qualification;
+import com.example.studioJudo.dto.QualificationDto;
+import com.example.studioJudo.mapper.impl.QualificationMapper;
 import com.example.studioJudo.repositories.QualificationRepository;
 import com.example.studioJudo.service.QualificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,21 @@ public class QualificationServiceImpl implements QualificationService {
     @Autowired
     private QualificationRepository qualificationRepository;
 
+    @Autowired
+    private QualificationMapper qualificationMapper;
+
     @Override
-    public List<Qualification> findAllQualification() {
-        return qualificationRepository.findAll();
+    public List<QualificationDto> findAllQualification() {
+        return qualificationRepository.findAll().stream()
+                .map(qualificationMapper::toDto)
+                .toList();
     }
 
     @Override
-    public Optional<Qualification> findQualificationById(Integer id) {
-        return qualificationRepository.findById(id);
+    public QualificationDto findQualificationById(Integer id) {
+        return qualificationRepository.findById(id).stream()
+                .map(qualificationMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Qualification not found"));
     }
 }

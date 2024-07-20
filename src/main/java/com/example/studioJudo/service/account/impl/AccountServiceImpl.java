@@ -20,6 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
@@ -35,46 +37,60 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public User signup(CreateUserRequest request) {
-        User user = new User();
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setPhoneNumber(request.getPhoneNumber());
-
+    public UserDto signup(CreateUserRequest request) {
         Role role = roleRepository.findById(1)
                 .orElseThrow(() -> new RuntimeException("Default role not found"));
-        user.setRole(role);
-        user.setIsTrainer(false);
-
-        return userService.saveUser(user);
+        return userService.saveUser(UserDto.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .phoneNumber(request.getPhoneNumber())
+                .roleId(1)
+                .isTrainer(false)
+                .build());
     }
 
     @Override
     @Transactional
-    public AuthenticationResponseDto login(AuthenticationRequestDto authenticationRequest) {
+    public AuthenticationResponseDto login(AuthenticationRequestDto authenticationRequest, String role, Integer id) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authenticationRequest.login(), authenticationRequest.password())
         );
         var user = userRepository.findUserByEmail(authenticationRequest.login())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return login(user);
+        var roleName = user.getRole().getName();
+        var userId = user.getId();
+        return login(user, roleName, userId);
     }
+
+//    @Override
+//    @Transactional
+//    public AuthenticationResponseDto refresh(RefreshRequestDto refreshRequest) {
+//        var userId = Integer.parseInt(jwtService.extractRefreshUserId(refreshRequest.refreshToken()));
+//        if(!refreshTokenRepository.existsByTokenAndCustomerId(refreshRequest.refreshToken(), userId)) {
+//            throw new UsernameNotFoundException("Refresh token not found");
+//        }
+//        var user = userRepository.findByIdWithRoles(userId)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//        return login(user);
+//    }
 
 //    @Override
 //    @Transactional
 //    public void logout() {
 //        Optional.ofNullable(authorityService.getCurrentUser())
-//                .ifPresent(customer -> refreshTokenRepository.deleteByCustomerId(customer.getId()));
+//                .ifPresent(user -> refreshTokenRepository.deleteByUserId(user.getId()));
 //    }
 
-    private AuthenticationResponseDto login(User user) {
-//        refreshTokenRepository.deleteByCustomerId(user.getId());
+    private AuthenticationResponseDto login(User user, String role, Integer id) {
+//        refreshTokenRepository.deleteByUserId(user.getId());
         return AuthenticationResponseDto.builder()
                 .token(jwtService.generateToken(user))
+                .role(role)
+                .id(id)
 //                .refreshToken(refreshTokenRepository.save(RefreshToken.builder()
-//                        .customer(user)
+//                        .user(user)
 //                        .token(jwtService.generateRefreshToken(String.valueOf(user.getId())))
 //                        .build()).getToken())
                 .build();

@@ -39,15 +39,15 @@ public class JwtServiceImpl implements JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    @Override
-    public <T> T extractRefreshClaim(String token, Function<Claims, T> claimsResolver) {
-        return claimsResolver.apply(extractClaims(token, getSigningKey(refreshSecret)));
-    }
+//    @Override
+//    public <T> T extractRefreshClaim(String token, Function<Claims, T> claimsResolver) {
+//        return claimsResolver.apply(extractClaims(token, getSigningKey(refreshSecret)));
+//    }
 
-    @Override
-    public String extractRefreshUserId(String token) {
-        return extractRefreshClaim(token, Claims::getSubject);
-    }
+//    @Override
+//    public String extractRefreshUserId(String token) {
+//        return extractRefreshClaim(token, Claims::getSubject);
+//    }
 
     @Override
     public String generateToken(UserDetails userDetails) {
@@ -65,15 +65,15 @@ public class JwtServiceImpl implements JwtService {
                 .compact();
     }
 
-    @Override
-    public String generateRefreshToken(String userId) {
-        return Jwts.builder()
-                .setSubject(userId)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + refreshExpiration))
-                .signWith(getSigningKey(refreshSecret), SignatureAlgorithm.HS256)
-                .compact();
-    }
+//    @Override
+//    public String generateRefreshToken(String userId) {
+//        return Jwts.builder()
+//                .setSubject(userId)
+//                .setIssuedAt(new Date(System.currentTimeMillis()))
+//                .setExpiration(new Date(System.currentTimeMillis() + refreshExpiration))
+//                .signWith(getSigningKey(refreshSecret), SignatureAlgorithm.HS256)
+//                .compact();
+//    }
 
     @Override
     public boolean isTokenValid(String token, UserDetails userDetails) {

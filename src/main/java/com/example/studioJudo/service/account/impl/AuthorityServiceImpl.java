@@ -1,5 +1,7 @@
 package com.example.studioJudo.service.account.impl;
 
+import com.example.studioJudo.dto.UserDto;
+import com.example.studioJudo.mapper.Mapper;
 import com.example.studioJudo.models.User;
 import com.example.studioJudo.service.account.AuthorityService;
 import lombok.AccessLevel;
@@ -13,9 +15,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthorityServiceImpl implements AuthorityService {
 
+    Mapper<UserDto, User> userMapper;
+
     @Override
-    public User getCurrentUser() {
-        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public UserDto getCurrentUser() {
+        return userMapper.toDto((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
 //    @Override

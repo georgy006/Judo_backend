@@ -7,9 +7,6 @@ import com.example.studioJudo.models.Role;
 import com.example.studioJudo.models.User;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static java.util.Objects.nonNull;
 
 @Component

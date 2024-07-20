@@ -15,6 +15,7 @@
     <include file="dml/qualification-values-insert-changelog.xml" relativeToChangelogFile="true"/>
     <include file="dml/role-values-insert-changelog.xml" relativeToChangelogFile="true"/>
     <include file="dml/user-values-insert-changelog.xml" relativeToChangelogFile="true"/>
+    <include file="dml/session-values-insert-changelog.xml" relativeToChangelogFile="true"/>
 
 <!--    <include file="dml/user-role-values-insert-changelog.xml" relativeToChangelogFile="true"/>-->
 <!--    <include file="dml/user-qualification-values-insert-changelog.xml" relativeToChangelogFile="true"/>-->

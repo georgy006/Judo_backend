@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -13,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
+@Builder
 @EqualsAndHashCode
 public class Session {
 
@@ -20,16 +23,16 @@ public class Session {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Date sessionDate;
-    private Time startTime;
-    private Time endTime;
+    private LocalDate sessionDate;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String description;
 
     @OneToOne(mappedBy = "session")
     @JsonIgnore
     private Booking booking;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 }

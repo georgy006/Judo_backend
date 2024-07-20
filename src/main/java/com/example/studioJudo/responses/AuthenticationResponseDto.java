@@ -6,8 +6,10 @@ import lombok.Builder;
 public record AuthenticationResponseDto(
 
         String token,
+        String role,
+        Integer id
 
-        String refreshToken
+//        String refreshToken
 
 ){
 }

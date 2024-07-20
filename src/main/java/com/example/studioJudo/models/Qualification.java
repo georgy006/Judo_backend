@@ -22,10 +22,6 @@ public class Qualification {
 
     private String name;
 
-//    @OneToMany(mappedBy = "qualification") //Узнать
-//    @JsonIgnore
-//    private List<Trainer> trainers;
-
     @OneToMany(mappedBy = "qualification")
     @JsonIgnore
     List<User> users;

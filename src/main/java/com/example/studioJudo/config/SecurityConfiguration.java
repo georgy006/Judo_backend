@@ -63,6 +63,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/user/signup").permitAll()
                         .requestMatchers("/api/user/login").permitAll()
                         .requestMatchers("/api/user/refresh").permitAll()
+                        .requestMatchers("/api/user").hasAnyAuthority("ADMIN", "CLIENT", "TRAINER")
                         .anyRequest().authenticated())
                 .exceptionHandling((exceptionHandlingConfigurer) -> {
                     exceptionHandlingConfigurer

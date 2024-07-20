@@ -1,12 +1,15 @@
 package com.example.studioJudo.models;
 
+import com.example.studioJudo.enumeration.RoleName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name="user", schema = "public")
@@ -33,7 +36,6 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "password")
-    @JsonIgnore
     String password;
 
     @Column(name = "phone_number")
@@ -53,9 +55,18 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id")
     private Role role;
 
+//    @ManyToOne
+//    @JoinColumn(name = "role_id")
+//    @Enumerated(EnumType.STRING)
+//    private RoleName role;
+
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false)
+//    @JsonIgnore
+//    private RefreshToken refreshToken;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority(role.getName()));
     }
 
     @Override
