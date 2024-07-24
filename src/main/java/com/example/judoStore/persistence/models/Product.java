@@ -29,4 +29,7 @@ public class Product {
     @JsonIgnore
     private List<OrderItem> orderItems;
 
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    List<ProductsCart> productsCarts;
 }

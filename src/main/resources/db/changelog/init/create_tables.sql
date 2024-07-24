@@ -53,5 +53,16 @@ CREATE TABLE blacklisted_tokens
     token varchar(512) NOT NULL UNIQUE,
     expiry_date timestamp NOT NULL,
     customer_id bigint NOT NULL
-
+);
+CREATE TABLE cart
+(
+    id bigserial CONSTRAINT сart_PK PRIMARY KEY,
+    customer_id bigint NOT NULL
+);
+CREATE TABLE products_cart
+(
+    id bigserial CONSTRAINT products_cart_PK PRIMARY KEY,
+    cart_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    quantity bigint NOT NULL
 );

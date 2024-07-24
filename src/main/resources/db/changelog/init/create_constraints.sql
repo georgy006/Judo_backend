@@ -26,4 +26,14 @@ ALTER TABLE blacklisted_tokens
     ADD CONSTRAINT blacklisted_tokens_customers_fk FOREIGN KEY (customer_id)
         REFERENCES customers (id);
 
+ALTER TABLE cart
+    ADD CONSTRAINT cart_customers_fk FOREIGN KEY (customer_id)
+        REFERENCES customers (id);
 
+ALTER TABLE products_cart
+    ADD CONSTRAINT products_cart_cart_fk FOREIGN KEY (cart_id)
+        REFERENCES cart (id);
+
+ALTER TABLE products_cart
+    ADD CONSTRAINT products_cart_product_fk FOREIGN KEY (product_id)
+        REFERENCES products (id);

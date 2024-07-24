@@ -35,9 +35,13 @@ public class Customer implements UserDetails {
     @JsonIgnore
     private RefreshToken refreshToken;
 
-//    @OneToMany(mappedBy = "customer")
-//    @JsonIgnore
-//    private List<BlacklistedToken> blacklistedToken;
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnore
+    private List<BlacklistedToken> blacklistedToken;
+
+    @OneToOne(mappedBy = "customer")
+    @JsonIgnore
+    private Cart cart;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
