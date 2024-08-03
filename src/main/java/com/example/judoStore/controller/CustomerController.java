@@ -1,9 +1,13 @@
 package com.example.judoStore.controller;
 
+import com.example.judoStore.persistence.models.Cart;
 import com.example.judoStore.persistence.models.Customer;
 import com.example.judoStore.requests.AuthenticationRequestDto;
 import com.example.judoStore.requests.CreateCustomerRequest;
-import com.example.judoStore.responses.AuthenticationResponseDto;
+import com.example.judoStore.responses.AuthenticationResponse;
+import com.example.judoStore.responses.CustomerInfoResponse;
+import com.example.judoStore.responses.dto.CustomerInfoDto;
+import com.example.judoStore.service.CartService;
 import com.example.judoStore.service.CustomerService;
 import com.example.judoStore.service.account.AccountService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,15 +24,17 @@ public class CustomerController {
 
     @Autowired
     AccountService accountService;
+    @Autowired
+    CartService cartService;
 
     @GetMapping(path = "/customers")
     public List<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
     }
 
-    @GetMapping(path = "/customer/{id}")
-    public Customer getCustomerById(@PathVariable(name = "id") Long id){
-        return customerService.getCustomerById(id);
+    @GetMapping(path = "/customer")
+    public CustomerInfoResponse getCustomer(){
+        return customerService.getCustomerInfo();
     }
 
     @DeleteMapping(path = "/customer/{id}")
@@ -36,26 +42,21 @@ public class CustomerController {
         customerService.deleteCustomerById(id);
     }
 
-    @PostMapping(path = "/customer")
-    public Customer createCustomer(@RequestBody CreateCustomerRequest request){
-//        return customerService.createCustomer(request);
-        return null;
-    }
-
-
     @PostMapping(path = "/customer/{id}")
     public Customer updateCustomerById(@PathVariable(name = "id") Long id,@RequestBody CreateCustomerRequest request){
         return customerService.updateCustomerById(id,request);
     }
 
     @PostMapping(path = "/customer/login")
-    public AuthenticationResponseDto login(@RequestBody AuthenticationRequestDto request){
+    public AuthenticationResponse login(@RequestBody AuthenticationRequestDto request){
         return accountService.authenticate(request);
     }
 
     @PostMapping(path = "/customer/register")
     public Customer register(@RequestBody CreateCustomerRequest request){
-        return accountService.register(request);
+        Customer customer = accountService.register(request);
+        cartService.updateCart(customer);
+        return customer;
     }
 
     @PostMapping(path = "/customers/logout")

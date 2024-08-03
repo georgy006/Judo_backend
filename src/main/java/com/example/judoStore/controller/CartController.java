@@ -1,7 +1,8 @@
 package com.example.judoStore.controller;
 
 import com.example.judoStore.persistence.models.Cart;
-import com.example.judoStore.responses.CartResponseDto;
+import com.example.judoStore.requests.CreateCartRequest;
+import com.example.judoStore.responses.CartResponse;
 import com.example.judoStore.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ public class CartController {
     private CartService cartService;
 
     @GetMapping("/cart")
-    public CartResponseDto getCart() {
+    public CartResponse getCart() {
         return cartService.getCart();
     }
 
@@ -22,20 +23,37 @@ public class CartController {
         return cartService.getCartById(id);
     }
 
-    @PostMapping("/cart")
-    public Cart createCart(@RequestBody Cart cart) {
-        return cartService.updateCart(cart);
-    }
+//    @PostMapping("/create-cart")
+//    public Cart createCart(@RequestBody CreateCartRequest request) {
+//        return cartService.updateCart();
+//    }
 
-    @DeleteMapping("/cart/{id}")
-    public ResponseEntity<Void> deleteCart(@PathVariable Long id) {
-        cartService.deleteCartById(id);
+    @DeleteMapping("/cart")
+    public ResponseEntity<Void> deleteProduct(@RequestParam Long productId) {
+        cartService.deleteCartById(productId);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/cart/{cartId}")
-    public CartResponseDto addProductToCart(@PathVariable Long cartId, @RequestParam Long productId,
-                                            @RequestParam Long quantity) {
-        return cartService.addProductToCart(cartId, productId, quantity);
+    @PostMapping("/cart")
+    public CartResponse addProductToCart(@RequestParam Long productId,
+                                         @RequestParam Long quantity) {
+        return cartService.addProductToCart(productId, quantity);
     }
+
+    @PostMapping("/cart/changeProductAmount")
+    public Long changeProductAmount(@RequestParam Long productId,
+                                         @RequestParam Boolean increase) {
+        return cartService.changeProductAmount(productId, increase);
+    }
+
+    @GetMapping("/getCartId")
+    public ResponseEntity<Long> getCartId(@RequestParam Long customerId) {
+        Long cartId = cartService.getCartIdByCustomerId(customerId);
+        if (cartId != null) {
+            return ResponseEntity.ok(cartId);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

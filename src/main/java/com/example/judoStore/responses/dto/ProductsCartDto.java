@@ -1,4 +1,4 @@
-package com.example.judoStore.responses;
+package com.example.judoStore.responses.dto;
 
 import com.example.judoStore.persistence.models.Product;
 

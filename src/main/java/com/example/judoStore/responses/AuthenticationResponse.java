@@ -3,7 +3,7 @@ package com.example.judoStore.responses;
 import lombok.Builder;
 
 @Builder
-public record AuthenticationResponseDto(
+public record AuthenticationResponse(
 
         String token,
 

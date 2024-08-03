@@ -14,7 +14,16 @@ import org.springframework.stereotype.Service;
 public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
-    public Customer getCurrentUser() {
+    public Customer getCurrentCustomer() {
+        return getCustomer();
+    }
+
+    @Override
+    public Long getCurrentCustomerId() {
+        return getCustomer().getId();
+    }
+
+    private Customer getCustomer(){
         return (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 

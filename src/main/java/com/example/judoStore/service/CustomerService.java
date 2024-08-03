@@ -2,13 +2,14 @@ package com.example.judoStore.service;
 
 import com.example.judoStore.persistence.models.Customer;
 import com.example.judoStore.requests.CreateCustomerRequest;
+import com.example.judoStore.responses.CustomerInfoResponse;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
 public interface CustomerService extends UserDetailsService {
     List<Customer> getAllCustomers();
-    Customer getCustomerById(Long id);
+    CustomerInfoResponse getCustomerInfo();
     Customer getCustomerByEmail(String email);
     void deleteCustomerById(Long id);
     Customer createCustomer(Customer customer);

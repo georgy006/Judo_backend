@@ -4,7 +4,9 @@ import com.example.judoStore.persistence.models.Customer;
 
 public interface AuthorityService {
 
-    Customer getCurrentUser();
+    Customer getCurrentCustomer();
+
+    Long getCurrentCustomerId();
 
 //    boolean hasAnyAuthority(List<RoleName> roles);
 //
