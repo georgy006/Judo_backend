@@ -5,7 +5,6 @@ import com.example.judoStore.persistence.repository.CartRepository;
 import com.example.judoStore.persistence.repository.CustomerRepository;
 import com.example.judoStore.persistence.repository.ProductRepository;
 import com.example.judoStore.persistence.repository.ProductsCartRepository;
-import com.example.judoStore.requests.CreateCartRequest;
 import com.example.judoStore.responses.CartResponse;
 import com.example.judoStore.responses.dto.ProductsCartDto;
 import com.example.judoStore.service.CartService;
@@ -47,8 +46,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartResponse getCart() {
-        Cart cart = cartRepository.getCartByCustomerId(authorityService.getCurrentCustomer().getId());
-        return getProductsCartDtos(cart);
+        return getProductsCartDtos(getCurrentCart());
     }
     @Override
     public Cart getCartById(Long id) {
@@ -63,6 +61,14 @@ public class CartServiceImpl implements CartService {
     public void deleteCartById(Long productId) {
         deleteProductById(productId);
     }
+
+    @Override
+    @Transactional
+    public void deleteProductsFromCart() {
+        Long cartId = cartRepository.getCartByCustomerId(authorityService.getCurrentCustomerId()).getId();
+        productsCartRepository.deleteProductsByCartId(cartId);
+    }
+
     private void deleteProductById(Long productId){
         Long cartId = cartRepository.getCartByCustomerId(authorityService.getCurrentCustomerId()).getId();
         productsCartRepository.deleteByCartIdAndProductId(cartId, productId);
@@ -112,6 +118,20 @@ public class CartServiceImpl implements CartService {
         return quantity;
     }
 
+
+
+    public Long getCartIdByCustomerId(Long customerId) {
+        Cart cart = cartRepository.findByCustomerId(customerId);
+        return cart != null ? cart.getId() : null;
+    }
+
+    @Override
+    public Cart getCurrentCustomerCart() {
+        return getCurrentCart();
+    }
+    private Cart getCurrentCart(){
+        return cartRepository.getCartByCustomerId(authorityService.getCurrentCustomer().getId());
+    }
     private static CartResponse getProductsCartDtos(Cart cart) {
         List<ProductsCartDto> products = cart.getProductsCarts().stream()
                 .map(productsCart ->
@@ -125,10 +145,5 @@ public class CartServiceImpl implements CartService {
                 cart.getCustomer().getId(),
                 products
         );
-    }
-
-    public Long getCartIdByCustomerId(Long customerId) {
-        Cart cart = cartRepository.findByCustomerId(customerId);
-        return cart != null ? cart.getId() : null;
     }
 }

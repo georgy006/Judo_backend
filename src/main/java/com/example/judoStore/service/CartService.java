@@ -2,7 +2,6 @@ package com.example.judoStore.service;
 
 import com.example.judoStore.persistence.models.Cart;
 import com.example.judoStore.persistence.models.Customer;
-import com.example.judoStore.requests.CreateCartRequest;
 import com.example.judoStore.responses.CartResponse;
 
 public interface CartService {
@@ -10,9 +9,10 @@ public interface CartService {
     CartResponse getCart();
     Cart getCartById(Long id);
     void deleteCartById(Long id);
+    void deleteProductsFromCart();
     CartResponse addProductToCart(Long productId, Long quantity);
-
     Long changeProductAmount(Long productId, Boolean increase);
-
     Long getCartIdByCustomerId(Long customerId);
+    Cart getCurrentCustomerCart();
+
 }

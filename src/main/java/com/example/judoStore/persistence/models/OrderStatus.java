@@ -14,6 +14,11 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 public class OrderStatus {
+
+    public static String WAITING = "В ожидании";
+    public static String SENT = "Отправлен";
+    public static String FINISHED = "Завершен";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,4 +26,5 @@ public class OrderStatus {
     @OneToMany(mappedBy = "orderStatus")
     @JsonIgnore
     private List<Order> orders;
+
 }

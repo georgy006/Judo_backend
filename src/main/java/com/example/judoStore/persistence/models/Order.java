@@ -21,7 +21,6 @@ public class Order {
     private Long id;
     private Timestamp ordersDate;
     private BigDecimal totalPrice;
-    private Long stockQuantity;
     @ManyToOne
     @JoinColumn(name = "status_id")
     private OrderStatus orderStatus;
