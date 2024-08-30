@@ -7,6 +7,7 @@ import com.example.judoStore.persistence.repository.ProductRepository;
 import com.example.judoStore.requests.CreateProductRequest;
 import com.example.judoStore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,5 +54,25 @@ public class ProductServiceImpl implements ProductService {
         }
         productRepository.save(product);
         return product;
+    }
+
+    public List<Product> getProductsSortedByName(String sortDirection, Boolean sortByName) {
+        if (sortByName) {
+            Sort sort = Sort.by("productName");
+            if ("DESC".equalsIgnoreCase(sortDirection)) {
+                sort = sort.descending();
+            } else {
+                sort = sort.ascending();
+            }
+            return productRepository.findAll(sort);
+        }else {
+            Sort sort = Sort.by("price");
+            if ("DESC".equalsIgnoreCase(sortDirection)) {
+                sort = sort.descending();
+            } else {
+                sort = sort.ascending();
+            }
+            return productRepository.findAll(sort);
+        }
     }
 }

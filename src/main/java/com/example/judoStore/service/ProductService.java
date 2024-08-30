@@ -10,4 +10,5 @@ public interface ProductService {
     Product getProductById(Long id);
     void deleteProductById(Long id);
     Product createProduct(CreateProductRequest request);
+    List<Product> getProductsSortedByName(String sortDirection, Boolean sortByName);
 }
